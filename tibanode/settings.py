@@ -19,7 +19,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment variables from .envs file
-env_file = BASE_DIR / ".envs"
+env_file = BASE_DIR / ".env"
 if env_file.is_file():
     load_dotenv(dotenv_path=env_file)
 
