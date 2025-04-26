@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.db.utils import IntegrityError
 from datetime import date, timedelta
-from core.models import HealthProgram, Client, Enrollment
+from core.health.models import HealthProgram, Client, Enrollment
 
 
 class HealthProgramModelTest(TestCase):

@@ -1,8 +1,8 @@
 from django.test import TestCase
 from datetime import date
 from rest_framework.test import APITestCase
-from core.models import HealthProgram, Client, Enrollment
-from core.serializers import (
+from core.health.models import HealthProgram, Client, Enrollment
+from core.health.serializers import (
     HealthProgramSerializer,
     EnrollmentSerializer,
     ClientSerializer,
