@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { DashboardHeader } from "./DashboardHeader";
 import { Footer } from "./Footer";
+import { Search } from "lucide-react";
 
 // Define types for our data
 interface Enrollment {
@@ -37,6 +38,7 @@ interface HealthProgram {
 
 const ClientManagement: React.FC = () => {
 	const [clients, setClients] = useState<Client[]>([]);
+	const [filteredClients, setFilteredClients] = useState<Client[]>([]);
 	const [healthPrograms, setHealthPrograms] = useState<HealthProgram[]>([]);
 	const [selectedClient, setSelectedClient] = useState<Client | null>(null);
 	const [formData, setFormData] = useState<Partial<Client>>({
@@ -55,6 +57,7 @@ const ClientManagement: React.FC = () => {
 	const [showProfile, setShowProfile] = useState(false);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
+	const [searchQuery, setSearchQuery] = useState("");
 
 	const baseUrl = "http://127.0.0.1:8000/api";
 
@@ -64,10 +67,27 @@ const ClientManagement: React.FC = () => {
 		fetchHealthPrograms();
 	}, []);
 
+	// Filter clients when searchQuery or clients change
+	useEffect(() => {
+		if (searchQuery.trim() === "") {
+			setFilteredClients(clients);
+		} else {
+			const query = searchQuery.toLowerCase();
+			const filtered = clients.filter(
+				(client) =>
+					client.full_name.toLowerCase().includes(query) ||
+					client.email.toLowerCase().includes(query) ||
+					client.phone_number.toLowerCase().includes(query),
+			);
+			setFilteredClients(filtered);
+		}
+	}, [searchQuery, clients]);
+
 	const fetchClients = async () => {
 		try {
 			const response = await axios.get(`${baseUrl}/clients/`);
 			setClients(response.data);
+			setFilteredClients(response.data); // Initialize filtered results with all clients
 		} catch (err) {
 			setError("Failed to fetch clients");
 			console.error(err);
@@ -109,6 +129,10 @@ const ClientManagement: React.FC = () => {
 			...enrollmentFormData,
 			program_id: parseInt(e.target.value),
 		});
+	};
+
+	const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setSearchQuery(e.target.value);
 	};
 
 	const resetForm = () => {
@@ -495,10 +519,33 @@ const ClientManagement: React.FC = () => {
 					</div>
 				)}
 
+				{/* Search Bar */}
+				<div className="bg-white p-6 rounded-lg shadow-md mb-8">
+					<div className="relative">
+						<div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+							<Search size={18} className="text-gray-400" />
+						</div>
+						<input
+							type="text"
+							placeholder="Search clients by name, email or phone number..."
+							value={searchQuery}
+							onChange={handleSearchChange}
+							className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+						/>
+					</div>
+					{searchQuery && (
+						<div className="mt-2 text-sm text-gray-600">
+							Found {filteredClients.length}{" "}
+							{filteredClients.length === 1 ? "client" : "clients"} matching "
+							{searchQuery}"
+						</div>
+					)}
+				</div>
+
 				{/* Clients Table */}
 				<div className="bg-white p-6 rounded-lg shadow-md">
 					<h2 className="text-xl font-semibold mb-4">Clients</h2>
-					{clients.length > 0 ? (
+					{filteredClients.length > 0 ? (
 						<div className="overflow-x-auto">
 							<table className="min-w-full bg-white">
 								<thead>
@@ -515,7 +562,7 @@ const ClientManagement: React.FC = () => {
 									</tr>
 								</thead>
 								<tbody>
-									{clients.map((client) => (
+									{filteredClients.map((client) => (
 										<tr key={client.id}>
 											<td className="py-2 px-4 border-b">{client.full_name}</td>
 											<td className="py-2 px-4 border-b">{client.age}</td>
@@ -563,7 +610,11 @@ const ClientManagement: React.FC = () => {
 							</table>
 						</div>
 					) : (
-						<p className="text-gray-500">No clients found.</p>
+						<p className="text-gray-500">
+							{searchQuery
+								? "No clients match your search criteria."
+								: "No clients found."}
+						</p>
 					)}
 				</div>
 			</div>
