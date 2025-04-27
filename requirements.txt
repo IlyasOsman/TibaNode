@@ -2,6 +2,7 @@ asgiref==3.8.1
 certifi==2025.1.31
 distlib==0.3.9
 Django==5.2
+django-cors-headers==4.7.0
 djangorestframework==3.16.0
 djangorestframework_simplejwt==5.5.0
 drf-yasg==1.21.10
