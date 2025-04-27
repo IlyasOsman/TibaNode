@@ -3,6 +3,7 @@ certifi==2025.1.31
 distlib==0.3.9
 Django==5.2
 djangorestframework==3.16.0
+djangorestframework_simplejwt==5.5.0
 drf-yasg==1.21.10
 filelock==3.18.0
 flake8==7.2.0
@@ -15,6 +16,7 @@ platformdirs==4.3.7
 pluggy==1.5.0
 pycodestyle==2.13.0
 pyflakes==3.3.2
+PyJWT==2.9.0
 pytest==8.3.5
 python-dotenv==1.1.0
 pytz==2025.2
