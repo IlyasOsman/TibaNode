@@ -59,7 +59,7 @@ const ClientManagement: React.FC = () => {
 	const [success, setSuccess] = useState("");
 	const [searchQuery, setSearchQuery] = useState("");
 
-	const baseUrl = "http://127.0.0.1:8000/api";
+	const TIBANODE_API = import.meta.env.VITE_REACT_APP_TIBANODE_API
 
 	// Fetch clients on component mount
 	useEffect(() => {
@@ -85,7 +85,7 @@ const ClientManagement: React.FC = () => {
 
 	const fetchClients = async () => {
 		try {
-			const response = await axios.get(`${baseUrl}/clients/`);
+			const response = await axios.get(`${TIBANODE_API}clients/`);
 			setClients(response.data);
 			setFilteredClients(response.data); // Initialize filtered results with all clients
 		} catch (err) {
@@ -96,7 +96,7 @@ const ClientManagement: React.FC = () => {
 
 	const fetchHealthPrograms = async () => {
 		try {
-			const response = await axios.get(`${baseUrl}/healthprograms/`);
+			const response = await axios.get(`${TIBANODE_API}healthprograms/`);
 			setHealthPrograms(response.data);
 		} catch (err) {
 			setError("Failed to fetch health programs");
@@ -106,7 +106,7 @@ const ClientManagement: React.FC = () => {
 
 	const fetchClientProfile = async (id: number) => {
 		try {
-			const response = await axios.get(`${baseUrl}/clients/${id}/profile/`);
+			const response = await axios.get(`${TIBANODE_API}clients/${id}/profile/`);
 			setSelectedClient(response.data);
 			setShowProfile(true);
 		} catch (err) {
@@ -154,7 +154,7 @@ const ClientManagement: React.FC = () => {
 		setSuccess("");
 
 		try {
-			await axios.post(`${baseUrl}/clients/`, formData);
+			await axios.post(`${TIBANODE_API}clients/`, formData);
 			fetchClients();
 			resetForm();
 			setSuccess("Client created successfully");
@@ -171,7 +171,7 @@ const ClientManagement: React.FC = () => {
 		setSuccess("");
 
 		try {
-			await axios.put(`${baseUrl}/clients/${selectedClient.id}/`, formData);
+			await axios.put(`${TIBANODE_API}clients/${selectedClient.id}/`, formData);
 			fetchClients();
 			resetForm();
 			setSuccess("Client updated successfully");
@@ -187,7 +187,7 @@ const ClientManagement: React.FC = () => {
 		setSuccess("");
 
 		try {
-			await axios.delete(`${baseUrl}/clients/${id}/`);
+			await axios.delete(`${TIBANODE_API}clients/${id}/`);
 			fetchClients();
 			setSuccess("Client deleted successfully");
 		} catch (err) {
@@ -204,7 +204,7 @@ const ClientManagement: React.FC = () => {
 
 		try {
 			// Send only the program_id in the request body
-			await axios.post(`${baseUrl}/clients/${selectedClient.id}/enroll/`, {
+			await axios.post(`${TIBANODE_API}clients/${selectedClient.id}/enroll/`, {
 				program_id: enrollmentFormData.program_id,
 			});
 

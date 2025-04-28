@@ -31,7 +31,7 @@ const HealthProgramManager: React.FC = () => {
 	);
 	const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-	const API_URL = "http://127.0.0.1:8000/api/healthprograms/";
+	const TIBANODE_API = `${import.meta.env.VITE_REACT_APP_TIBANODE_API}healthprograms/`;
 
 	// Fetch all health programs
 	const fetchPrograms = async () => {
@@ -39,7 +39,7 @@ const HealthProgramManager: React.FC = () => {
 		setError(null);
 
 		try {
-			const response = await fetch(API_URL);
+			const response = await fetch(TIBANODE_API);
 
 			if (!response.ok) {
 				throw new Error(`API error: ${response.status}`);
@@ -67,7 +67,7 @@ const HealthProgramManager: React.FC = () => {
 		setError(null);
 
 		try {
-			const response = await fetch(API_URL, {
+			const response = await fetch(TIBANODE_API, {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -106,7 +106,7 @@ const HealthProgramManager: React.FC = () => {
 		setError(null);
 
 		try {
-			const response = await fetch(`${API_URL}${editingProgram.id}/`, {
+			const response = await fetch(`${TIBANODE_API}${editingProgram.id}/`, {
 				method: "PUT",
 				headers: {
 					"Content-Type": "application/json",
@@ -152,7 +152,7 @@ const HealthProgramManager: React.FC = () => {
 		setError(null);
 
 		try {
-			const response = await fetch(`${API_URL}${id}/`, {
+			const response = await fetch(`${TIBANODE_API}${id}/`, {
 				method: "DELETE",
 			});
 

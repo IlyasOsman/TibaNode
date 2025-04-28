@@ -39,11 +39,11 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 );
 
 // API configuration
-const API_URL = "http://127.0.0.1:8000/api/";
+const TIBANODE_API = import.meta.env.VITE_REACT_APP_TIBANODE_API
 
 // Configure axios defaults
 const api = axios.create({
-	baseURL: API_URL,
+	baseURL: TIBANODE_API,
 	headers: {
 		"Content-Type": "application/json",
 	},
@@ -65,7 +65,7 @@ api.interceptors.response.use(
 					throw new Error("No refresh token available");
 				}
 
-				const response = await axios.post(`${API_URL}/user/login/refresh/`, {
+				const response = await axios.post(`${TIBANODE_API}/user/login/refresh/`, {
 					refresh: tokens.refresh,
 				});
 
