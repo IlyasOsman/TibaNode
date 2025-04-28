@@ -64,9 +64,11 @@ python manage.py loaddata loaddata.json
 python manage.py runserver
 ```
 
-# Visit Api
+# [Visit Api](https://tibanode.onrender.com/redoc/)
 
 Visit [http://127.0.0.1:8000](http://127.0.0.1:8000) to access the application.
+
+Live .[api](https://tibanode.onrender.com/redoc/)
 
 # Frontend Setup
 
@@ -111,11 +113,11 @@ Documentation is available via **Swagger UI** at `/redoc/` when the server is ru
 
 | Endpoint | Method | Description |
 |:---------|:------:|:------------|
-| `/api/healthprograms/` | GET | List all health programs |
+| [`/api/healthprograms/`](https://tibanode.onrender.com/api/healthprograms/) | GET | List all health programs |
 | `/api/healthprograms/` | POST | Create a new health program |
-| `/api/clients/` | GET | List all clients |
+| [`/api/clients/`](https://tibanode.onrender.com/api/clients) | GET | List all clients |
 | `/api/clients/` | POST | Register a new client |
-| `/api/clients/{id}/` | GET | View client details |
+| `/api/clients/{id}/profile` | GET | View client details |
 
 ---
 
