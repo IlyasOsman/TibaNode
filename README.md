@@ -88,6 +88,13 @@ npm run dev
 
 Visit [http://localhost:5173](http://localhost:5173) to access the application.
 
+Visit live application here [https://client-copy-mplg.onrender.com](https://client-copy-mplg.onrender.com)
+
+Sign up or log in with this detail:
+
+- **Email**: `admin@gmail.com`
+- **Password**: `admin@2025`
+
 ---
 
 # 🔒 Security Considerations
