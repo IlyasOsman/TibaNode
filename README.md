@@ -4,11 +4,6 @@
 
 TibaNode is a comprehensive health information system designed to streamline the management of clients and health programs. This solution allows healthcare providers to efficiently track patient enrollments across multiple health programs while maintaining data security and accessibility.
 
-## 📑 PowerPoint Presentation
-
-Kindly [**click here**](https://docs.google.com/presentation/d/1_-vbxkrFoPHqg_MKgdCa838YFrtQSkCXHyxGk0LXB54/edit?usp=sharing) to access the PowerPoint presentation.
-
-
 ## 🌟 Key Features
 
 - **Program Management**: Create and manage health programs (TB, Malaria, HIV, etc.)
